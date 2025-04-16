@@ -1,205 +1,148 @@
 import random
+from logging import critical
 
-print("""
-==================================
-== Bem-vindo ao Duelo de Heróis ==
-==================================""")
+#Definindo o ataque
+ataque_jogador_1 = random.randint(1, 51)
+ataque_jogador_2 = random.randint(1, 51)
 
-menu = int(input("""
-====== MENU ======
+#Definindo a defesa
+defesa_jogador_1 = random.randint(1, 51)
+defesa_jogador_2 = random.randint(1, 51)
 
-[1] - Singleplayer
-[2] - Multiplayer
-[3] - Sair
-"""))
+#Fazendo com que o ataque não seja menor que a defesa
+while ataque_jogador_1 < defesa_jogador_2:
+    ataque_jogador_1 = random.randint(1, 51)
 
-cura = 0
+while ataque_jogador_2 < defesa_jogador_1:
+    ataque_jogador_2 = random.randint(1, 51)
 
-dano_ataque = 0
+#Definindo o valor da cura
+cura = 20
 
-turno = 0
+#Resultado do ataque
+resultado_ataque = 0
 
-vida = random.randint(1, 15)
+#Definindo a quantidade de vida
+vida = random.randint(200, 1001)
 
+#Atribuindo o valor da vida para os dois jogadores
 vida_jogador_1 = vida
 vida_jogador_2 = vida
-vida_maquina = vida
 
-ataque_jogador_1 = random.randint(1, 5)
-ataque_jogador_2 = random.randint(1, 5)
-ataque_maquina = random.randint(1, 5)
+#Definindo o turno
+turno = 0
 
-defesa_jogador_1 = random.randint(1, 5)
-defesa_jogador_2 = random.randint(1, 5)
-defesa_maquina = random.randint(1, 5)
-
-while ataque_jogador_1 <= defesa_jogador_2:
-    ataque_jogador_1 = random.randint(1, 5)
-
-while ataque_jogador_2 <= defesa_jogador_1:
-    ataque_jogador_2 = random.randint(1, 5)
-
-while ataque_jogador_1 <= defesa_maquina:
-    ataque_jogador_1 = random.randint(1, 5)
-
-while ataque_maquina <= defesa_jogador_1:
-    ataque_maquina = random.randint(1, 5)
-
-critico = ['critico', 'dobro_critico']
-chance = [1.1, 1]
-
-opcao = 0
-acao_maquina = 0
-
-if menu == 1:
-
-    print(f'=== Inicio Partida ===')
-
-    print(f"""
+# Menu para definir o modo de jogo
+menu = int(input(
+"""
 === DUELO DE HERÓIS ===
-===       Você      ===
+[1] - Singleplayer (vs CPU)
+[2] - Multiplayer
+[3] - Sair
+"""
+))
+
+# Modos de jogo
+if menu == 1:
+    multiplayer = False
+elif menu == 2:
+    multiplayer = True
+else:
+    print("Saindo...")
+    exit()
+
+print(
+f"""
+=== DUELO DE HERÓIS ===
+=== Jogador 1 ===
 HP: {vida_jogador_1}
 ATQ: {ataque_jogador_1}          DEF: {defesa_jogador_1}
 
-===      Inimigo    ===
-HP: {vida_maquina}
-ATQ: {ataque_maquina}          DEF: {defesa_maquina}
-""")
+=== Jogador 2 ===
+HP: {vida_jogador_2}
+ATQ: {ataque_jogador_2}          DEF: {defesa_jogador_2}
+"""
+)
 
-    while vida_jogador_1 > 0 and vida_maquina > 0:
+while vida_jogador_1 > 0 and vida_jogador_2 > 0:
+    turno += 1
 
-        turno += 1
-        print(f'--- Turno {turno} ---')
-        print(f'Seu HP: {vida_jogador_1} | Inimigo HP: {vida_maquina}')
+    critico = random.randint(1, 10) == 10
 
+    print(
+    f"""
+    === Turno {turno} ===
+    Jogador 1 HP: [{vida_jogador_1}] | Jogador 2 HP: [{vida_jogador_2}]
+    """)
 
-        acao_maquina = random.choice(["atacar", "curar"])
+    opcao = int(input(
+        f'''
+        JOGADOR 1
+        Sua vez: [1] Atacar ou [2] Curar?
+        '''))
 
-        if vida_jogador_1 < (vida * 0.5):
-            print("Você pode dar um ataque critico")
-            ataque_critico = int(input("Você quer fazer o ataque critico:\n [1] Sim\n [2] Não"))
+    if opcao == 1:
 
-            if ataque_critico == 1:
-                dano_critico = random.choices(critico, weights=chance, k=1)
-                if dano_critico == 'critico':
-                    dano_ataque = dano_ataque + (dano_ataque * 0.2)
-                else:
-                    dano_ataque = dano_ataque * 2
-            elif ataque_critico == 2:
-                print("Ataque critico não executado")
-                continue
-            else:
-                print("Opção invalida")
+        critico = random.randint(1, 10) == 10
+
+        if critico:
+            ataque_jogador_1 = ataque_jogador_1 * 2
+            print("Ataque critico")
         else:
-            opcao = int(input("Sua vez: [1] Atacar ou [2] Curar?"))
+            resultado_ataque = ataque_jogador_1 - defesa_jogador_2
+            vida_jogador_2 = vida_jogador_2 - resultado_ataque
 
-            match opcao:
-                case 1:
-                    # Ataque de jogador contra inimigo
-                    dano_ataque = ataque_jogador_1 - defesa_maquina
-                    vida_maquina = vida_maquina - dano_ataque
-
-                    print(f"Você ataca! Inimigo perde {dano_ataque} HP.")
-                case 2:
-                    if vida_jogador_1 + cura > vida:
-                        vida_jogador_1 = vida
-                    else:
-                        vida_jogador_1 = vida_jogador_1 + cura
-                    print(f"Você curou! Sua vida agora é: {vida_jogador_1}")
-
-                case _:
-                    print("Inválido")
-
-            if acao_maquina == "atacar":
-                dano_ataque = ataque_maquina - defesa_jogador_1
-                vida_jogador_1 = vida_jogador_1 - dano_ataque
-                print(f'Inimigo ataca! Você perde {dano_ataque} HP.\n')
-            else:
-                if vida_maquina + cura > vida:
-                    vida_maquina = vida
-                else:
-                    vida_maquina = vida_maquina + cura
-                print(f'inimigo cura! Vida dele está {vida_maquina} HP.\n')
+        print(f"Você ataca! Jogador 2 perde {resultado_ataque} HP.")
 
 
-elif menu == 2:
-
-    print(f"""
-        === DUELO DE HERÓIS ===
-        
-        ===     Jogador 1   ===
-        HP: {vida_jogador_1}
-        ATQ: {ataque_jogador_1}          DEF: {defesa_jogador_1}
-
-        ===     Jogador 2   ===
-        HP: {vida_jogador_2}
-        ATQ: {ataque_jogador_2}          DEF: {defesa_jogador_2}
-        """)
-
-
-    while vida_jogador_1 > 0 and vida_jogador_2 > 0:
-
-        turno += 1
-        print(f'--- Turno {turno} ---')
-        print(f'Seu HP: {vida_jogador_1} | Inimigo HP: {vida_jogador_2}')
-
-        print("Jagador 1")
-        opcao_jogador1 = int(input("Sua vez: [1] Atacar ou [2] Curar?"))
-
-
-        if opcao_jogador1 == 1:
-            dano_ataque = ataque_jogador_1 - defesa_jogador_2
-            vida_jogador_2 = vida_jogador_2 - dano_ataque
-
-            print(f"Jogador 1 ataca! Adversário perde {dano_ataque} HP.")
-
-            print(f'Jogador 1 HP: {vida_jogador_1} | Jogador 2 HP: {vida_jogador_2}\n')
-
-
-        elif opcao_jogador1 == 2:
-            if vida_jogador_1 + cura > vida:
-                vida_jogador_1 = vida
-            else:
-                vida_jogador_1 = vida_jogador_1 + cura
-            print(f"Você curou! Sua vida agora é: {vida_jogador_1}")
-
-            print(f'Jogador 1 HP: {vida_jogador_1} | Jogador 2 HP: {vida_jogador_2}\n')
+    elif opcao == 2:
+        if vida_jogador_1 + cura > vida:
+            vida_jogador_1 = vida
         else:
-            print("Opção Inválida! - Perdeu a vez\n")
-            continue
+            vida_jogador = vida_jogador_1 + cura
+        print(f"Você curou! Vida jogador 1: {vida_jogador_1}")
 
-        print("Jagador 2")
-        opcao_jogador2 = int(input("Sua vez: [1] Atacar ou [2] Curar?"))
+    else:
+        print("Opção invalida")
+        continue
 
+    if multiplayer:
+        opcao = int(input(
+            f'''
+                JOGADOR 2
+                Sua vez: [1] Atacar ou [2] Curar?
+            
+            '''))
+    else:
+        opcao = random.randint(1, 2)
 
-        if opcao_jogador2 == 1:
-            dano_ataque = ataque_jogador_2 - defesa_jogador_1
-            vida_jogador_1 = vida_jogador_1 - dano_ataque
+        critico = random.randint(1, 10) == 10
 
-            print(f"Jogador 2 ataca! Adversário perde {dano_ataque} HP.")
+        if critico:
+            ataque_jogador_2 = ataque_jogador_2 * 2
+            print("Ataque critico")
+        else:
+            resultado_ataque = ataque_jogador_1 - defesa_jogador_2
+            vida_jogador_2 = vida_jogador_2 - resultado_ataque
 
-            print(f'Jogador 1: {vida_jogador_1} | Jogador 2 HP: {vida_jogador_2}\n')
-        elif opcao_jogador2 == 2:
+        if opcao == 1:
+            resultado_ataque = ataque_jogador_2 - defesa_jogador_1
+            vida_jogador_1 = vida_jogador_1 - resultado_ataque
+
+            print(f"Você ataca! Jogador 1 perde {resultado_ataque} HP.")
+
+        elif opcao == 2:
             if vida_jogador_2 + cura > vida:
                 vida_jogador_2 = vida
             else:
-                vida_jogador_2 = vida_jogador_2 + cura
-            print(f"Você curou! Sua vida agora é: {vida_jogador_2}")
+                vida_jogador = vida_jogador_2 + cura
+            print(f"Você curou! Vida jogador 2: {vida_jogador_2}")
 
-            print(f'Jogaodor 2 HP: {vida_jogador_1} | Jogador 2 HP: {vida_jogador_2}\n')
         else:
-            print("Opção Inválida! - Perdeu a vez\n")
+            print("Opção invalida")
+            continue
 
-    if vida_jogador_1 > vida_maquina:
-        print(f'Jogador 1 venceu a partida singleplayer!')
-    elif vida_maquina > vida_jogador_1:
-        print(f'A maquina venceu a partida singleplayer!')
-
-    if vida_jogador_1 > vida_jogador_2:
-        print(f'jogador 1 venceu a partida multiplayer!')
-    elif vida_jogador_2 > vida_jogador_1:
-        print(f'jogador 2 venceu a partida multiplayer!')
-
-elif menu == 3:
-    print("Saindo...")
-
+if vida_jogador_1 == 0:
+    print("Jogador 2 Venceu")
+else:
+    print("Jogador 1 Venceu")
