@@ -11,7 +11,7 @@ else:
         soma += 1/i
         serie_harmonica.append(serie)
 
-    serie_harmonica = " + ".join(serie_harmonica)
 
-    print(f'A série harmônica de {num} é {serie_harmonica}')
+
+    print(f'{serie_harmonica}')
     print(f'A soma é: {soma:.2f}')
