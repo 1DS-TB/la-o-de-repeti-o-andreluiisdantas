@@ -1,16 +1,14 @@
-num = int(input("Digite um número: "))
+N = int(input("Digite um número: "))
 
-if num == 0 or num == 1:
-    print("OK")
-elif num < 0:
+if N <= 0 or N == 1:
     print("INVALIDO")
 else:
     primo = True
-    for i in range(2, num):
-        if num % i == 0:
+    for i in range(2, N):
+        if N % i == 0:
             primo = False
             break
     if primo:
-        print(f'O número {num} é primo')
+        print(f'O número {N} é primo')
     else:
-        print(f'O número {num} não é primo')
+        print(f'O número {N} não é primo')
