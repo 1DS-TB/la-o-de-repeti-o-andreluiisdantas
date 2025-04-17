@@ -1,4 +1,7 @@
 num = int(input("Digite um numero: "))
 
-for i in range(num+1):
-    print(i*'*')
+if num <= 0:
+    print("INVALIDO")
+else:
+    for i in range(num+1):
+        print(i*'*')
