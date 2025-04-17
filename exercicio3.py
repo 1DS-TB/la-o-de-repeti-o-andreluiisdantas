@@ -1,9 +1,9 @@
-num = int(input("Digite um número "))
+N = int(input("Digite um número "))
 
-if num < 0:
+if N <= 0:
     print("INVALIDO")
 else:
     for i in range(1, 11):
-        resultado = num * i
+        resultado = N * i
 
-        print(f'{i} * {num} = {resultado}')
+        print(f'{i} * {N} = {resultado}')
