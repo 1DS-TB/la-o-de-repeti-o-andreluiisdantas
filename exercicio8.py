@@ -1,13 +1,13 @@
-num = int(input("Digite um número: "))
+n = int(input("Digite um número: "))
 serie_harmonica = []
 soma = 0
 
-if num < 0:
+if n < 0:
     print("INVALIDO")
-elif num == 0:
+elif n == 0:
     print("OK")
 else:
-    for i in range(1, num + 1):
+    for i in range(1, n + 1):
         serie = f"1/{i}"
         soma += 1 / i
         serie_harmonica.append(serie)
