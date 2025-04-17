@@ -12,7 +12,7 @@ else:
         lista.append(serie)
 
     if num == 0:
-        print("OK")
+        print("INVALIDO")
     else:
         serie_formatada = " + ".join(lista)
         print(f'A série harmônica de {num} é {serie_formatada}')
