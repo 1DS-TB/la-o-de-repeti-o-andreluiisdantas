@@ -3,7 +3,7 @@ lista = []
 serie = 0
 soma = 0
 
-if num == 0:
+if num <= 0:
     print("INVALIDO")
 else:
     for i in range(1, num+1):
