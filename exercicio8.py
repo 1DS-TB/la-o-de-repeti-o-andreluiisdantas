@@ -13,5 +13,5 @@ else:
 
 
 
-    print(f'{serie_harmonica}')
+    print(serie_harmonica)
     print(f'A soma é: {soma:.2f}')
