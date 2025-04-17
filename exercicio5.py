@@ -1,4 +1,3 @@
-
 num = int(input("Digite um número: "))
 primo = True
 if num > 0:
@@ -10,7 +9,9 @@ if num > 0:
         print(f'O número {num} é primo')
     else:
         print(f'O número {num} não é primo')
+elif num == 0:
+    print(f'O número {num} não é primo')
 else:
-    print("O número precisa ser positivo")
+    print("INVALIDO")
 
 
