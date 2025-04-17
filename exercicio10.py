@@ -5,10 +5,12 @@ try:
     fim = int(input("Digite o final da lista: "))
 
     if inicio <= 0 or fim <= 0:
-        print("INVÁLIDO")
+        print("INVALIDO")
+        print("OK") 
     elif inicio > fim:
         print("INVÁLIDO")
         print("O segundo número precisa ser maior que o primeiro")
+        print("OK")
     else:
         kaprekar = []
 
