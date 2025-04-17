@@ -1,6 +1,5 @@
 num = int(input("Digite um número: "))
 serie_harmonica = []
-serie = 0
 soma = 0
 
 if num < 0:
