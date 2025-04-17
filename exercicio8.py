@@ -1,5 +1,5 @@
 num = int(input("Digite um número: "))
-lista = []
+serie_harmonica = []
 serie = 0
 soma = 0
 
@@ -9,9 +9,9 @@ else:
     for i in range(1, num+1):
         serie = f"1/{i}"
         soma += 1/i
-        lista.append(serie)
+        serie_harmonica.append(serie)
 
-    serie_formatada = " + ".join(lista)
+    serie_harmonica = " + ".join(serie_harmonica)
 
-    print(f'A série harmônica de {num} é {serie_formatada}')
+    print(f'A série harmônica de {num} é {serie_harmonica}')
     print(f'A soma é: {soma:.2f}')
