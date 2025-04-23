@@ -9,8 +9,8 @@ elif N == 1:
 elif N == 2:
     print(b)
 else:
-    s = '0,1 '
+    s = '0, 1'
     for i in range(N - 2):
         a, b = b, b + a
-        s += f',{b} '
+        s += f', {b}'
     print(s)
