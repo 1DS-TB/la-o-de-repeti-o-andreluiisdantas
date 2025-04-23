@@ -3,8 +3,10 @@ serie_harmonica = []
 serie = 0
 soma = 0
 
-if num <= 0:
+if num < 0:
     print("INVALIDO")
+elif num == 0:
+    print(f'A soma é: {soma:.2f}')
 else:
     for i in range(1, num+1):
         serie = f"1/{i}"
