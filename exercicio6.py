@@ -2,7 +2,7 @@ N = int(input("Digite um número: "))
 
 a = 0
 b = 1
-if N <= 0:
+if N == 0:
     print("INVALIDO")
 elif N == 1:
     print(a)
