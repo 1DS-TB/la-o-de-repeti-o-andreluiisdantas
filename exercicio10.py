@@ -4,9 +4,7 @@ try:
     inicio = int(input("Digite o inicio da lista: "))
     fim = int(input("Digite o final da lista: "))
 
-    if inicio <= 0 or fim <= 0:
-        print("INVALIDO")
-    elif inicio > fim:
+    if inicio > fim:
         print("INVALIDO")
     else:
         kaprekar = []
