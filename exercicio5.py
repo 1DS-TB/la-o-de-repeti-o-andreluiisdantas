@@ -1,7 +1,7 @@
 N = int(input("Digite um número: "))
 
 if N <= 0 or N == 1:
-    print("INVALIDO")
+    print(f'O número {N} não é primo')
 else:
     primo = True
     for i in range(2, N):
