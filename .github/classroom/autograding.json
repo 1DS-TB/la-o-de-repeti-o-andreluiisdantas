@@ -191,7 +191,7 @@
       "description": "Testa quando o início do intervalo é maior que o fim"
     },
     {
-      "name": "10.2 Verificar exerprintf '-100\n100\n' | python exercicio10.py | grep -q '1' && echo -e '-100\n100' | python exercicio10.py | grep -q '9' && echo 'OK' || echo 'ERRO'cicio10.py com números negativos",
+      "name": "10.2 Verificar exercicio10.py com números negativos",
       "run": "printf '-100\n100\n' | python exercicio10.py | grep -q '1' && echo -e '-100\n100' | python exercicio10.py | grep -q '9' && echo 'OK' || echo 'ERRO'",
       "output": "OK",
       "timeout": 10,
