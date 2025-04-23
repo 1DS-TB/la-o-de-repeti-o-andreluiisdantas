@@ -1,16 +1,11 @@
 N = int(input("Digite um número: "))
 
-a = 0
-b = 1
-if N == 0:
-    print("INVALIDO")
-elif N == 1:
-    print(a)
-elif N == 2:
-    print(b)
+if N <= 0:
+    print("OK")
 else:
-    s = '0 1 '
-    for i in range(N - 2):
-        a, b = b, b + a
-        s += f'{b} '
+    a, b = 0, 1
+    s = "0"
+    for _ in range(1, N):
+        s += f" {b}"
+        a, b = b, a + b
     print(s)
