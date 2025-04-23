@@ -1,8 +1,8 @@
 N = int(input("Digite um número: "))
 
-if N < 0:
+if N <= 0:
     print("INVALIDO")
-elif N == 0 or N == 1:
+elif N == 1:
     print(f'O número {N} não eh primo')
 else:
     primo = True
